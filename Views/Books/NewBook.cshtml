@@ -1,0 +1,48 @@
+﻿@model LibraryTest.Models.BookModel
+
+@{
+    ViewData["Title"] = "NewBook";
+}
+
+<h4>Add New Book</h4>
+<hr />
+<form asp-action="NewBook">
+    <div class="col-md-4">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="BookName" class="control-label">Book Name</label>
+            <input asp-for="BookName" class="form-control" />
+            <span asp-validation-for="BookName" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="AuthorLastName" class="control-label">Author Last Name</label>
+            <input asp-for="AuthorLastName" class="form-control" />
+            <span asp-validation-for="AuthorLastName" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="AuthorFirstName" class="control-label">Author First Name</label>
+            <input asp-for="AuthorFirstName" class="form-control" />
+            <span asp-validation-for="AuthorFirstName" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="ReleaseYear" class="control-label">Release Year</label>
+            <input asp-for="ReleaseYear" class="form-control" />
+            <span asp-validation-for="ReleaseYear" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="ISBN" class="control-label">ISBN</label>
+            <input asp-for="ISBN" class="form-control" />
+            <span asp-validation-for="ISBN" class="text-danger"></span>
+        </div>
+    </div>
+        <div class="col">
+            <div class="form-group">
+                <label asp-for="Description" class="control-label">Description</label>
+                <textarea asp-for="Description" class="form-control" rows="10"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Create" class="btn btn-primary" asp-controller="Books" asp-action="NewBook" />
+    
+</form>

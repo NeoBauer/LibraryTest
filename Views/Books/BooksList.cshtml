@@ -1,0 +1,60 @@
+﻿@using System.Security.Claims;
+@{int i = 0;}
+
+<div class="col">
+
+    @foreach (var book in ViewBag.BookList)
+    {
+        string NewId = "id" + i;
+
+        <div class="row">
+            <div class="card w-100 text-center mt-3">
+                <div class="card-body">
+                    <h5 class="card-title">@book.BookName</h5>
+                    <p class="card-text">@book.AuthorFirstName @book.AuthorLastName</p>
+                    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#@NewId" aria-expanded="false" aria-controls="BookControls">
+                        Show Descprition
+                    </button>
+                    <div class="collapse mt-3" id="@NewId">
+                        <div class="card card-body">
+                            <div class="col">
+                                <div class="row mt-2">
+                                    <p class="card-text">
+                                        Author: @book.AuthorFirstName @book.AuthorLastName
+                                    </p>
+                                </div>
+                                <div class="row mt-2">
+                                    <p class="card-text">
+                                        Release Year: @book.ReleaseYear
+                                    </p>
+                                </div>
+                                <div class="row mt-2">
+                                    <p class="card-text">
+                                        ISBN: @book.ISBN
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="mt-3">
+                                @book.Description;
+                            </div>
+                        </div>
+                        <form method="post">
+                            @if (book.IsReserved == false)
+                            {
+                                <button input type="submit" class="btn btn-primary btn-danger mt-3" asp-controller="Reservations" asp-action="NewReservation" asp-route-isbn="@book.ISBN">Reserve!</button>
+                            }
+                            else if (book.IsReserved == true && book.ReservedByUserID == User.FindFirstValue(ClaimTypes.NameIdentifier))
+                            {
+                                <button input type="submit" class="btn btn-disabled btn-danger mt-3">Reserved by You!</button>
+                            }else 
+                            {
+                                <button input type="submit" class="btn btn-disabled btn-danger mt-3">Already Reserved!</button>
+                            }
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        i++;
+    }
+</div>

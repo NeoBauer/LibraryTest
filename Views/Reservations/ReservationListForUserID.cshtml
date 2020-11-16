@@ -1,0 +1,35 @@
+﻿@using System.Security.Claims;
+@{int i = 0;}
+
+@if (ViewBag.reservations == null)
+{
+    <div class="col">
+        <div class="row justify-content-md-center row mt-5">
+            <h2>
+                You have no reserved books!
+            </h2>
+        </div>
+    </div>
+
+}
+else
+{
+    <div class="col">
+
+        @foreach (var reservation in ViewBag.reservations)
+        {
+            string NewId = "id" + i;
+
+            <div class="card mt-3">
+                <div class="card-body">
+                    <h5 class="card-title">@reservation.Item2</h5>
+                    <p class="card-text">You reserved it on @reservation.Item1.ReservationDate.ToString("dd/MM/yyyy")</p>
+                    <form method="post">
+                        <button input type="submit" class="btn btn-primary btn-danger mt-3" asp-controller="Reservations" asp-action="ReturnBook" asp-route-isbn="@reservation.Item1.ReservedBookISBN">Return Book</button>
+                    </form>
+                </div>
+            </div>
+            i++;
+        }
+    </div>
+}

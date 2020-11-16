@@ -1,0 +1,21 @@
+﻿@if (User.Identity.IsAuthenticated && User.IsInRole("RegularUser") || User.IsInRole("Admin"))
+{
+    <ul class="navbar-nav mr-auto">
+        <li>
+            <a class="nav-link text-dark" asp-controller="Books" asp-action="BooksList">Book List</a>
+        </li>
+    </ul>
+    <ul class="navbar-nav mr-auto">
+        <li>
+            <a class="nav-link text-dark" asp-controller="Reservations" asp-action="ReservationListForUserID">My Reservations</a>
+        </li>
+    </ul>
+}
+@if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+{
+    <ul class="navbar-nav mr-auto">
+        <li>
+            <a class="nav-link text-dark" asp-controller="Books" asp-action="NewBook">Add Books</a>
+        </li>
+    </ul>
+}
